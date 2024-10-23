@@ -30,6 +30,6 @@ public class Player : MonoBehaviour
         {
             direction += Vector3.right;
         }
-        transform.position += direction * playerSpeed * Time.deltaTime;
+        transform.position += direction.normalized * playerSpeed * Time.deltaTime;
     }
 }
