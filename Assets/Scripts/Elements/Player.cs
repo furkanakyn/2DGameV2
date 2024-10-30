@@ -21,6 +21,17 @@ public class Player : MonoBehaviour
             Shoot();
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+        }
+        if (collision.CompareTag("Collectable"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
     void MovePlayer()
     {
         Vector3 direction = Vector3.zero;
