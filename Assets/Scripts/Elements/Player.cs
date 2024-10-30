@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
         
     }
 
-   
     void Update()
     {
         MovePlayer();
@@ -29,15 +28,15 @@ public class Player : MonoBehaviour
         {
             direction += Vector3.up;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             direction += Vector3.down;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             direction += Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             direction += Vector3.right;
         }
