@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Bullet bulletPrefab;
+    
     public float playerSpeed;
+    public float playerBulletSpeed;
     public float playerXBorders;
     public float playerYBorders;
     void Start()
@@ -16,7 +19,7 @@ public class Player : MonoBehaviour
     {
         MovePlayer();
         ClampPlayerPosition();
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }
@@ -80,6 +83,8 @@ public class Player : MonoBehaviour
     }
     void Shoot()
     {
-
+        var newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.position = transform.position;
+        newBullet.StartBullet(playerBulletSpeed);
     }
 }

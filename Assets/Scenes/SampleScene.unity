@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f5b0a30b90f1e45b6112efc9a317a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 836589813656828549, guid: ac6f09ce3a745864296bd2045473e615, type: 3}
   playerSpeed: 5
+  playerBulletSpeed: 20
   playerXBorders: 2.5
   playerYBorders: 4.5
 --- !u!4 &428387534
@@ -289,6 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4999217552755056116, guid: be44ce13445fcaf4d9057f675e097e49, type: 3}
+  enemyYSpacing: 1.5
+  enemyCount: 20
 --- !u!1 &498721228
 GameObject:
   m_ObjectHideFlags: 0
