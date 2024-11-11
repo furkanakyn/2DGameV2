@@ -8,11 +8,12 @@ public class Player : MonoBehaviour
     
     public float playerSpeed;
     public float playerBulletSpeed;
+    public int bulletDamage;
     public float playerXBorders;
     public float playerYBorders;
     void Start()
     {
-        
+       
     }
 
     void Update()
@@ -84,7 +85,8 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         var newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.position = transform.position;
+        newBullet.transform.position = transform.position + new Vector3(0,.5f,0);
         newBullet.StartBullet(playerBulletSpeed);
     }
+    
 }
