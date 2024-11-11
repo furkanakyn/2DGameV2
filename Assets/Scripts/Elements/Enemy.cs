@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int startHealth;
+    private int _startHealth;
     private int _currentHealth;
     public float speed;
     public TextMeshPro healthTMP;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
+
+    public GameObject coinPrefab;
 
     private void Start()
     {
-        _currentHealth = startHealth;
+        _startHealth += Random.Range(1, 10);
+        _currentHealth = _startHealth;
         healthTMP.text = _currentHealth.ToString();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -34,13 +36,15 @@ public class Enemy : MonoBehaviour
         transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
 
         spriteRenderer.DOKill();
-        spriteRenderer.color = Color.red;
-        spriteRenderer.DOColor(Color.white, .1f).SetLoops(2, LoopType.Yoyo);
+        spriteRenderer.color = Color.white;
+        spriteRenderer.DOColor(Color.red, .1f).SetLoops(2, LoopType.Yoyo);
 
 
         if (_currentHealth <= 0) 
-        { 
-            gameObject.SetActive(false);
+        {
+            spriteRenderer.DOKill();
+            gameObject.transform.DOKill();
+            Destroy(gameObject);
         }
 
     }
@@ -49,7 +53,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("DownBorder"))
         {
-           gameObject.SetActive(false);
+            gameObject.transform.DOKill();
+            Destroy(gameObject);
         }
     }
     

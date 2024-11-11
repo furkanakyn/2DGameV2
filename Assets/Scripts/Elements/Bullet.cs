@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float _bulletSpeed;
+    private Vector3 _dir;
 
 
-    public void StartBullet(float playerBulletSpeed)
+    public void StartBullet(float playerBulletSpeed, Vector3 direction)
     {
         _bulletSpeed = playerBulletSpeed;
-        
+        _dir = direction;
     }
     void Update()
     {
@@ -21,12 +23,15 @@ public class Bullet : MonoBehaviour
 
         if (collision.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
+
             collision.GetComponent<Enemy>().GetHit(1);
+            Destroy(gameObject);
         }
         if (collision.CompareTag("Border"))
         {
-            gameObject.SetActive(false);
+
+            gameObject.transform.DOKill();
+            Destroy(gameObject);
         }
     }
 }

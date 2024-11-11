@@ -11,19 +11,19 @@ public class Player : MonoBehaviour
     public int bulletDamage;
     public float playerXBorders;
     public float playerYBorders;
+    public float attackRate;
+
+
     void Start()
     {
-       
+        StartCoroutine(ShootCoroutine());
     }
 
     void Update()
     {
         MovePlayer();
         ClampPlayerPosition();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
+      
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        if (collision.CompareTag("Collectable"))
+        if (collision.CompareTag("Coin"))
         {
             collision.gameObject.SetActive(false);
         }
@@ -82,11 +82,34 @@ public class Player : MonoBehaviour
         }
         transform.position = pos;
     }
-    void Shoot()
+
+    IEnumerator ShootCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(attackRate);
+            for(int i = 0; i < attackRate; i++)
+            {
+                if (i == 0)
+                {
+                    Shoot(Vector3.up);
+                }
+                else if (i == 1)
+                {
+                    Shoot(new Vector3 (-.5f,1,0));
+                }
+                else if (i == 1)
+                {
+                    Shoot(new Vector3(.5f, 1, 0));
+                }
+            }    
+        }
+    }
+    void Shoot(Vector3 dir)
     {
         var newBullet = Instantiate(bulletPrefab);
         newBullet.transform.position = transform.position + new Vector3(0,.5f,0);
-        newBullet.StartBullet(playerBulletSpeed);
+        newBullet.StartBullet(playerBulletSpeed,dir);
     }
-    
+ 
 }
