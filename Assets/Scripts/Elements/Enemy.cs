@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _startHealth += Random.Range(1, 10);
+        _startHealth += Random.Range(1, 20);
         _currentHealth = _startHealth;
         healthTMP.text = _currentHealth.ToString();
     }
@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0) 
         {
+            var newCoin = Instantiate(coinPrefab);
+            newCoin.transform.position = transform.position + Vector3.forward;
             spriteRenderer.DOKill();
             gameObject.transform.DOKill();
             Destroy(gameObject);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7327919708240548548}
   - component: {fileID: 6340906842546830034}
   m_Layer: 0
-  m_Name: EnemyPrefab
+  m_Name: BossEnemyPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ RectTransform:
   m_GameObject: {fileID: 1271245396039239959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2644168463948936173}
   - {fileID: 8397325014700670397}
@@ -55,7 +55,7 @@ MonoBehaviour:
   speed: 3
   healthTMP: {fileID: 4144206208157571408}
   spriteRenderer: {fileID: 362275541986391991}
-  coinPrefab: {fileID: 8734789927383295504, guid: ac6f09ce3a745864296bd2045473e615, type: 3}
+  coinPrefab: {fileID: 2833877096536561702, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
 --- !u!61 &7327919708240548548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 7
+  m_fontSizeBase: 7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

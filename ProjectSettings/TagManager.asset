@@ -8,6 +8,7 @@ TagManager:
   - Collectable
   - Border
   - DownBorder
+  - Coin
   layers:
   - Default
   - TransparentFX

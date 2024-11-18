@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameDirector gameDirector;
     public Bullet bulletPrefab;
-    
+   
     public float playerSpeed;
     public float playerBulletSpeed;
     public int bulletDamage;
     public float playerXBorders;
     public float playerYBorders;
     public float attackRate;
+    public int extraShootCount;
 
 
     void Start()
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Coin"))
         {
+            gameDirector.coinManager.IncreaseCointCount(1);
             collision.gameObject.SetActive(false);
         }
     }
@@ -43,15 +46,15 @@ public class Player : MonoBehaviour
         {
             direction += Vector3.up;
         }
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             direction += Vector3.down;
         }
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             direction += Vector3.left;
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             direction += Vector3.right;
         }
@@ -65,7 +68,7 @@ public class Player : MonoBehaviour
             pos.x = -playerXBorders;
 
         }
-        if (transform.position.x > playerXBorders)
+        else if (transform.position.x > playerXBorders)
         {
             pos.x = playerXBorders;
 
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
             pos.y = -playerYBorders;
 
         }
-        if (transform.position.y > playerYBorders)
+        else if (transform.position.y > playerYBorders)
         {
             pos.y = playerYBorders;
 
@@ -88,7 +91,8 @@ public class Player : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(attackRate);
-            for(int i = 0; i < attackRate; i++)
+
+            for (int i = 0; i < extraShootCount + 1; i++)
             {
                 if (i == 0)
                 {
@@ -96,20 +100,20 @@ public class Player : MonoBehaviour
                 }
                 else if (i == 1)
                 {
-                    Shoot(new Vector3 (-.5f,1,0));
+                    Shoot(new Vector3(-.25f, 1, 0));
                 }
-                else if (i == 1)
+                else if (i == 2)
                 {
-                    Shoot(new Vector3(.5f, 1, 0));
+                    Shoot(new Vector3(.25f, 1, 0));
                 }
-            }    
+            }
         }
     }
     void Shoot(Vector3 dir)
     {
         var newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.position = transform.position + new Vector3(0,.5f,0);
-        newBullet.StartBullet(playerBulletSpeed,dir);
+        newBullet.transform.position = transform.position;
+        newBullet.StartBullet(playerBulletSpeed, dir);
     }
- 
+
 }

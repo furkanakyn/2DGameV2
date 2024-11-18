@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f5b0a30b90f1e45b6112efc9a317a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDirector: {fileID: 498721230}
   bulletPrefab: {fileID: 836589813656828549, guid: ac6f09ce3a745864296bd2045473e615, type: 3}
   playerSpeed: 5
   playerBulletSpeed: 20
@@ -237,6 +238,7 @@ MonoBehaviour:
   playerXBorders: 2.5
   playerYBorders: 4.5
   attackRate: 0.2
+  extraShootCount: 3
 --- !u!4 &428387534
 Transform:
   m_ObjectHideFlags: 0
@@ -370,8 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5911737777885217426, guid: be44ce13445fcaf4d9057f675e097e49, type: 3}
+  bossEnemyPrefab: {fileID: 5911737777885217426, guid: 75150f27052a1c748b4430ec574178bf, type: 3}
   enemyYSpacing: 1.5
-  enemyCount: 20
 --- !u!1 &498721228
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +405,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 494071764}
+  - {fileID: 1285336640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498721230
@@ -418,6 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 494071765}
+  coinManager: {fileID: 1285336639}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +809,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1285336638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285336640}
+  - component: {fileID: 1285336639}
+  m_Layer: 0
+  m_Name: CoinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1285336639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285336638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa622c405015e4488e64ec93c5da77b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectedCoinCount: 0
+--- !u!4 &1285336640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285336638}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 498721229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290307074
 GameObject:
   m_ObjectHideFlags: 0
