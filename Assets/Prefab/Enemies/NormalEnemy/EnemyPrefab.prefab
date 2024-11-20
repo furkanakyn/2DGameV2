@@ -55,7 +55,8 @@ MonoBehaviour:
   speed: 3
   healthTMP: {fileID: 4144206208157571408}
   spriteRenderer: {fileID: 362275541986391991}
-  coinPrefab: {fileID: 2833877096536561702, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
+  coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
+  powerUpPrefab: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
 --- !u!61 &7327919708240548548
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,8 +11,10 @@ public class Enemy : MonoBehaviour
     public float speed;
     public TextMeshPro healthTMP;
     public SpriteRenderer spriteRenderer;
+    private bool _didSpawnCoin;
 
-    public GameObject coinPrefab;
+    public Coin coinPrefab;
+    public PowerUp powerUpPrefab;
 
     private void Start()
     {
@@ -42,8 +44,22 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0) 
         {
-            var newCoin = Instantiate(coinPrefab);
-            newCoin.transform.position = transform.position + Vector3.forward;
+            if (!_didSpawnCoin)
+            {
+                if(Random.value < .5f)
+                {
+                    var newCoin = Instantiate(coinPrefab);
+                    newCoin.transform.position = transform.position + Vector3.forward;
+                    newCoin.StartCoin();
+                }
+                else
+                {
+                    var newPowerUp = Instantiate(powerUpPrefab);
+                    newPowerUp.transform.position = transform.position + Vector3.forward;
+                    newPowerUp.StartPowerUp();
+                }
+                _didSpawnCoin = true;
+            }
             spriteRenderer.DOKill();
             gameObject.transform.DOKill();
             Destroy(gameObject);
@@ -51,13 +67,6 @@ public class Enemy : MonoBehaviour
 
     }
     
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("DownBorder"))
-        {
-            gameObject.transform.DOKill();
-            Destroy(gameObject);
-        }
-    }
+
     
 }

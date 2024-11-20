@@ -9,11 +9,14 @@ public class Player : MonoBehaviour
    
     public float playerSpeed;
     public float playerBulletSpeed;
-    public int bulletDamage;
     public float playerXBorders;
     public float playerYBorders;
     public float attackRate;
+   
     public int extraShootCount;
+    public int bulletDamage;
+
+    public List<Vector3> shootDirectinos;
 
 
     void Start()
@@ -32,10 +35,18 @@ public class Player : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             gameObject.SetActive(false);
+           
         }
         if (collision.CompareTag("Coin"))
         {
             gameDirector.coinManager.IncreaseCointCount(1);
+            gameDirector.FXManager.PlayCoinCollectedFX(collision.transform.position);
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("PowerUp"))
+        {
+
+            extraShootCount++;
             collision.gameObject.SetActive(false);
         }
     }
@@ -94,26 +105,15 @@ public class Player : MonoBehaviour
 
             for (int i = 0; i < extraShootCount + 1; i++)
             {
-                if (i == 0)
-                {
                     Shoot(Vector3.up);
-                }
-                else if (i == 1)
-                {
-                    Shoot(new Vector3(-.25f, 1, 0));
-                }
-                else if (i == 2)
-                {
-                    Shoot(new Vector3(.25f, 1, 0));
-                }
             }
         }
     }
     void Shoot(Vector3 dir)
     {
         var newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.position = transform.position;
-        newBullet.StartBullet(playerBulletSpeed, dir);
+        newBullet.transform.position = transform.position + new Vector3(0,.75f,0);
+        newBullet.StartBullet(playerBulletSpeed, dir , gameDirector);
     }
 
 }

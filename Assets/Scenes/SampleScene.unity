@@ -182,7 +182,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 1}
+  m_Size: {x: 50, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &83403906
 Transform:
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 428387536}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,11 +234,12 @@ MonoBehaviour:
   bulletPrefab: {fileID: 836589813656828549, guid: ac6f09ce3a745864296bd2045473e615, type: 3}
   playerSpeed: 5
   playerBulletSpeed: 20
-  bulletDamage: 1
   playerXBorders: 2.5
   playerYBorders: 4.5
   attackRate: 0.2
-  extraShootCount: 3
+  extraShootCount: 2
+  bulletDamage: 1
+  shootDirectinos: []
 --- !u!4 &428387534
 Transform:
   m_ObjectHideFlags: 0
@@ -406,6 +407,7 @@ Transform:
   m_Children:
   - {fileID: 494071764}
   - {fileID: 1285336640}
+  - {fileID: 2002217115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498721230
@@ -422,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 494071765}
   coinManager: {fileID: 1285336639}
+  FXManager: {fileID: 2002217116}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,9 +867,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1290307076}
   - component: {fileID: 1290307075}
+  - component: {fileID: 1290307077}
+  - component: {fileID: 1290307078}
   m_Layer: 0
   m_Name: ScreenDownBorder
-  m_TagString: DownBorder
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -914,7 +919,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 1}
+  m_Size: {x: 50, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &1290307076
 Transform:
@@ -931,6 +936,91 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1290307077
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290307074}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1290307078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290307074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fbddc051dc5634b9e2e6fe2498d05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2002217114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002217115}
+  - component: {fileID: 2002217116}
+  m_Layer: 0
+  m_Name: FXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2002217115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002217114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 498721229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002217116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002217114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b2a4576c87fe245a9127f66ea6ce1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCollectedPS: {fileID: 8510881095742924675, guid: 0f7fc4eddc94dd643bbcf432f81f919e, type: 3}
+  bulletHitPS: {fileID: 8510881095742924675, guid: f85d507d6876c784591d764e19c47bf1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

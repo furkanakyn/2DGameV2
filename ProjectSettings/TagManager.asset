@@ -7,8 +7,8 @@ TagManager:
   - Enemy
   - Collectable
   - Border
-  - DownBorder
   - Coin
+  - PowerUp
   layers:
   - Default
   - TransparentFX
