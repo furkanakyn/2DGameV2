@@ -14,6 +14,12 @@ public class DownBorder : MonoBehaviour
         }
         if (collision.CompareTag("Enemy"))
         {
+            DOTween.Kill(collision.gameObject);
+            collision.gameObject.transform.DOKill();
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("PowerUp"))
+        {
             collision.gameObject.transform.DOKill();
             Destroy(collision.gameObject);
         }

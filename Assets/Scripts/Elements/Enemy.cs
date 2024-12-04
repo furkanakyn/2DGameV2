@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Enemy : MonoBehaviour
 {
-    private int _startHealth;
+    private Player _player;
+    public int startHealth;
     private int _currentHealth;
     public float speed;
     public TextMeshPro healthTMP;
@@ -15,11 +17,15 @@ public class Enemy : MonoBehaviour
 
     public Coin coinPrefab;
     public PowerUp powerUpPrefab;
+    public bool isBoss;
 
-    private void Start()
+
+    public void StartEnemy(Player player)
     {
-        _startHealth += Random.Range(1, 20);
-        _currentHealth = _startHealth;
+        _player = player;
+        startHealth += Random.Range(1, 10);
+        startHealth += 10 * (player.shootDirections.Count - 1);
+        _currentHealth = startHealth;
         healthTMP.text = _currentHealth.ToString();
     }
 
@@ -40,6 +46,7 @@ public class Enemy : MonoBehaviour
         spriteRenderer.DOKill();
         spriteRenderer.color = Color.white;
         spriteRenderer.DOColor(Color.red, .1f).SetLoops(2, LoopType.Yoyo);
+        spriteRenderer.DOKill();
 
 
         if (_currentHealth <= 0) 
@@ -58,8 +65,13 @@ public class Enemy : MonoBehaviour
                     newPowerUp.transform.position = transform.position + Vector3.forward;
                     newPowerUp.StartPowerUp();
                 }
+                if (isBoss)
+                {
+                    _player.gameDirector.LevelCompleted();
+                }
                 _didSpawnCoin = true;
             }
+            
             spriteRenderer.DOKill();
             gameObject.transform.DOKill();
             Destroy(gameObject);

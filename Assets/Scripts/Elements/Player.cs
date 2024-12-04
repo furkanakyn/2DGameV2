@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,22 +7,49 @@ public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
     public Bullet bulletPrefab;
-   
-    public float playerSpeed;
+    public Transform bulletsParent;
+    public float playerMoveSpeed;
     public float playerBulletSpeed;
     public float playerXBorders;
     public float playerYBorders;
     public float attackRate;
+    public int enemyDamage;
    
-    public int extraShootCount;
     public int bulletDamage;
 
-    public List<Vector3> shootDirectinos;
+    public int startHealth;
+    private int _curHealth;
+
+    public List<Vector3> shootDirections;
+
+    public Transform healthBarFillParent;
+    public SpriteRenderer healthBarFill;
+
+    private Vector3 _mousePivotPos;
+    private Coroutine _shootCoroutine;
 
 
-    void Start()
+    public void RestartPlayer()
     {
-        StartCoroutine(ShootCoroutine());
+        gameObject.SetActive(true);
+        _curHealth = startHealth;
+        gameDirector.healtBar.SetMaxHealt(startHealth);
+        transform.position = new Vector3(0, -2.8f, 0);
+        StopShooting();
+        if (_shootCoroutine != null)
+        {
+            StopCoroutine(_shootCoroutine);
+        }
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
+        shootDirections.Clear();
+        shootDirections.Add(Vector3.up);
+    }
+    public void StopShooting()
+    {
+        if (_shootCoroutine != null)
+        {
+            StopCoroutine(_shootCoroutine);
+        }
     }
 
     void Update()
@@ -34,8 +62,15 @@ public class Player : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
-           
+            _curHealth -= 1;
+            UpdateHealthBar(enemyDamage);
+            if (_curHealth <= 0)
+            {
+                gameObject.SetActive(false);
+                gameDirector.LevelFailed();
+            }
+            gameDirector.FXManager.PlayPlayerHitFX(transform.position);
+
         }
         if (collision.CompareTag("Coin"))
         {
@@ -45,31 +80,26 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("PowerUp"))
         {
-
-            extraShootCount++;
+            shootDirections.Add(new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0).normalized);
             collision.gameObject.SetActive(false);
         }
+    }
+    void UpdateHealthBar(int damage)
+    {
+        gameDirector.healtBar.TakeDamage(damage);
     }
     void MovePlayer()
     {
         Vector3 direction = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetMouseButtonDown(0))
         {
-            direction += Vector3.up;
+            _mousePivotPos = Input.mousePosition;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetMouseButton(0))
         {
-            direction += Vector3.down;
+            direction = Input.mousePosition - _mousePivotPos;
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += Vector3.right;
-        }
-        transform.position += direction.normalized * playerSpeed * Time.deltaTime;
+        transform.position += direction * playerMoveSpeed * Time.deltaTime;
     }
     void ClampPlayerPosition()
     {
@@ -103,17 +133,21 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(attackRate);
 
-            for (int i = 0; i < extraShootCount + 1; i++)
+            for (int i = 0; i < shootDirections.Count; i++)
             {
-                    Shoot(Vector3.up);
+                    Shoot(shootDirections[i]);
             }
         }
     }
     void Shoot(Vector3 dir)
     {
-        var newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.position = transform.position + new Vector3(0,.75f,0);
-        newBullet.StartBullet(playerBulletSpeed, dir , gameDirector);
+        var newBullet = Instantiate(bulletPrefab, bulletsParent);
+        newBullet.transform.position = transform.position;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
+        newBullet.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        newBullet.StartBullet(playerBulletSpeed, dir, gameDirector);
     }
 
 }
