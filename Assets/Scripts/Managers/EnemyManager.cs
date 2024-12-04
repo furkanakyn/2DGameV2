@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public GameDirector gameDirector;
     public Player player;
     public Enemy enemyPrefab;
     public Enemy bossEnemyPrefab;
@@ -38,7 +39,9 @@ public class EnemyManager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1.5f + Random.Range(0,2f));
-            if(_spawnedEnemyCount < 20)
+            var enemeyCountBonus = (gameDirector.levelNo - 1) * 5;
+            enemeyCountBonus = Mathf.Min(enemeyCountBonus, 95);
+            if (_spawnedEnemyCount < 5 + enemeyCountBonus)
             {
                 if (Random.value < .75f)
                 {
@@ -67,7 +70,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player);
+        newEnemy.StartEnemy(player , gameDirector);
     }
 
     void SpawnTwoEnemies()
@@ -78,7 +81,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player);
+        newEnemy.StartEnemy(player, gameDirector);
 
         var newEnemy2 = Instantiate(enemyPrefab);
         var enemyXPos2 = Random.Range(-1f, -2.2f);
@@ -86,7 +89,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy2.transform.position = new Vector3(enemyXPos2, enemyYPos2, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy2);
-        newEnemy2.StartEnemy(player);
+        newEnemy2.StartEnemy(player, gameDirector);
     }
 
     void SpawnBoss()
@@ -97,6 +100,6 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player);
+        newEnemy.StartEnemy(player, gameDirector);
     }
 }

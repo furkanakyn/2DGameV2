@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         {
 
             collision.GetComponent<Enemy>().GetHit(1);
-            _gameDirector.FXManager.PlayBulletHitPS(collision.transform.position);
+            _gameDirector.FXManager.PlayBulletHitPS(transform.position);
             Destroy(gameObject);
         }
         if (collision.CompareTag("Border"))

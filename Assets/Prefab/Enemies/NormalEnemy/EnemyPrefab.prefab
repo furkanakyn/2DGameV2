@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a7432ef9bf5db4fbcbdd46b8a4fe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 5
-  speed: 3
+  startHealth: 0
+  speed: 2
   healthTMP: {fileID: 4144206208157571408}
   spriteRenderer: {fileID: 362275541986391991}
   coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}

@@ -7,9 +7,12 @@ public class GameDirector : MonoBehaviour
     public EnemyManager enemyManager;
     public CoinManager coinManager;
     public FXManager FXManager;
+    public AudioManager audioManager;
     public Player player;
     public HealtBar healtBar;
     public MainUI mainUI;
+
+    public int levelNo;
     void Start()
     {
         RestartLevel();
@@ -23,6 +26,7 @@ public class GameDirector : MonoBehaviour
     }
     public void RestartLevel()
     {
+        levelNo = PlayerPrefs.GetInt("HighestLevelReached");
         player.RestartPlayer();
         enemyManager.RestartEnemyManager();
         mainUI.RestartMainUI();

@@ -14,16 +14,12 @@ public class Player : MonoBehaviour
     public float playerYBorders;
     public float attackRate;
     public int enemyDamage;
-   
-    public int bulletDamage;
-
+ 
     public int startHealth;
     private int _curHealth;
 
     public List<Vector3> shootDirections;
 
-    public Transform healthBarFillParent;
-    public SpriteRenderer healthBarFill;
 
     private Vector3 _mousePivotPos;
     private Coroutine _shootCoroutine;
@@ -36,14 +32,15 @@ public class Player : MonoBehaviour
         gameDirector.healtBar.SetMaxHealt(startHealth);
         transform.position = new Vector3(0, -2.8f, 0);
         StopShooting();
-        if (_shootCoroutine != null)
-        {
-            StopCoroutine(_shootCoroutine);
-        }
-        _shootCoroutine = StartCoroutine(ShootCoroutine());
         shootDirections.Clear();
         shootDirections.Add(Vector3.up);
     }
+
+    private void StartShooting()
+    {
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
+    }
+
     public void StopShooting()
     {
         if (_shootCoroutine != null)
@@ -56,7 +53,14 @@ public class Player : MonoBehaviour
     {
         MovePlayer();
         ClampPlayerPosition();
-      
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartShooting();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopShooting();
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -131,6 +135,7 @@ public class Player : MonoBehaviour
             for (int i = 0; i < shootDirections.Count; i++)
             {
                     Shoot(shootDirections[i]);
+                    
             }
         }
     }
@@ -143,6 +148,7 @@ public class Player : MonoBehaviour
         newBullet.transform.rotation = Quaternion.Euler(0, 0, angle);
 
         newBullet.StartBullet(playerBulletSpeed, dir, gameDirector);
+        gameDirector.audioManager.PlayBulletAS();
     }
 
 }

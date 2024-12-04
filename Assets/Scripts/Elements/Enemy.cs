@@ -8,23 +8,25 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class Enemy : MonoBehaviour
 {
     private Player _player;
+    private GameDirector _gameDirector;
     public int startHealth;
     private int _currentHealth;
     public float speed;
     public TextMeshPro healthTMP;
     public SpriteRenderer spriteRenderer;
     private bool _didSpawnCoin;
-
+    
     public Coin coinPrefab;
     public PowerUp powerUpPrefab;
     public bool isBoss;
 
 
-    public void StartEnemy(Player player)
+    public void StartEnemy(Player player, GameDirector gameDirector)
     {
         _player = player;
+        _gameDirector = gameDirector;
         startHealth += Random.Range(1, 10);
-        startHealth += 10 * (player.shootDirections.Count - 1);
+        startHealth += 5 * (player.shootDirections.Count - 1);
         _currentHealth = startHealth;
         healthTMP.text = _currentHealth.ToString();
     }
@@ -40,8 +42,12 @@ public class Enemy : MonoBehaviour
         healthTMP.text = _currentHealth.ToString();
 
         transform.DOKill();
-        transform.localScale = Vector3.one;
-        transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 1.2f;
+        transform.DOScale(targetScale, .1f).SetLoops(2, LoopType.Yoyo);
+        transform.DOKill();
+
+
 
         spriteRenderer.DOKill();
         spriteRenderer.color = Color.white;
@@ -51,6 +57,7 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0) 
         {
+            _gameDirector.audioManager.PlayEnemyDestroyedAS();
             if (!_didSpawnCoin)
             {
                 if(Random.value < .5f)
@@ -71,10 +78,10 @@ public class Enemy : MonoBehaviour
                 }
                 _didSpawnCoin = true;
             }
-            
+   
+            Destroy(gameObject);
             spriteRenderer.DOKill();
             gameObject.transform.DOKill();
-            Destroy(gameObject);
         }
 
     }
