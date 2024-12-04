@@ -64,11 +64,6 @@ public class Player : MonoBehaviour
         {
             _curHealth -= 1;
             UpdateHealthBar(enemyDamage);
-            if (_curHealth <= 0)
-            {
-                gameObject.SetActive(false);
-                gameDirector.LevelFailed();
-            }
             gameDirector.FXManager.PlayPlayerHitFX(transform.position);
 
         }
