@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     public Player player;
     public Enemy enemyPrefab;
     public Enemy bossEnemyPrefab;
+    
     public float enemyYSpacing;
     private int _spawnedEnemyCount;
 

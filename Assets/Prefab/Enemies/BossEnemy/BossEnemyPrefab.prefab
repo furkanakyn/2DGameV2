@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 1271245396039239959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2644168463948936173}
@@ -52,12 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a7432ef9bf5db4fbcbdd46b8a4fe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
+  powerUpPrefab: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
+  enemyType: 3
   startHealth: 0
   speed: 1
   healthTMP: {fileID: 4144206208157571408}
   spriteRenderer: {fileID: 362275541986391991}
-  coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
-  powerUpPrefab: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
   isBoss: 1
 --- !u!61 &7327919708240548548
 BoxCollider2D:
@@ -158,8 +159,8 @@ RectTransform:
   m_GameObject: {fileID: 4158512233333301895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.0666667}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1732578473972368881}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -328,7 +329,7 @@ RectTransform:
   m_GameObject: {fileID: 6503027067924182373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1732578473972368881}

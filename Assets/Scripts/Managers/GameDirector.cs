@@ -31,6 +31,7 @@ public class GameDirector : MonoBehaviour
         enemyManager.RestartEnemyManager();
         mainUI.RestartMainUI();
         mainUI.SetLevelText(PlayerPrefs.GetInt("HighestLevelReached"));
+        healtBar.healtFill.color = Color.white;
     }
     public void LevelFailed()
     {

@@ -8,13 +8,15 @@ public class Player : MonoBehaviour
     public GameDirector gameDirector;
     public Bullet bulletPrefab;
     public Transform bulletsParent;
+   
     public float playerMoveSpeed;
     public float playerBulletSpeed;
     public float playerXBorders;
     public float playerYBorders;
     public float attackRate;
+    
+    
     public int enemyDamage;
- 
     public int startHealth;
     private int _curHealth;
 

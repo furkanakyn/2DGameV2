@@ -9,17 +9,21 @@ public class Enemy : MonoBehaviour
 {
     private Player _player;
     private GameDirector _gameDirector;
-    public int startHealth;
-    private int _currentHealth;
-    public float speed;
-    public TextMeshPro healthTMP;
-    public SpriteRenderer spriteRenderer;
-    private bool _didSpawnCoin;
-    
     public Coin coinPrefab;
     public PowerUp powerUpPrefab;
-    public bool isBoss;
 
+    public EnemyType enemyType;
+
+    public int startHealth;
+    private int _currentHealth;
+    
+    public float speed;
+   
+    public TextMeshPro healthTMP;
+    public SpriteRenderer spriteRenderer;
+    
+    public bool isBoss;
+    private bool _isEnemyDestroyed;
 
     public void StartEnemy(Player player, GameDirector gameDirector)
     {
@@ -40,27 +44,35 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth -= damage;
         healthTMP.text = _currentHealth.ToString();
-
         transform.DOKill();
-        Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = originalScale * 1.2f;
-        transform.DOScale(targetScale, .1f).SetLoops(2, LoopType.Yoyo);
-        transform.DOKill();
-
+        transform.localScale = Vector3.one;
+        transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
 
 
         spriteRenderer.DOKill();
         spriteRenderer.color = Color.white;
         spriteRenderer.DOColor(Color.red, .1f).SetLoops(2, LoopType.Yoyo);
-        spriteRenderer.DOKill();
+        
 
 
-        if (_currentHealth <= 0) 
+        if (_currentHealth <= 0)
         {
-            _gameDirector.audioManager.PlayEnemyDestroyedAS();
-            if (!_didSpawnCoin)
+            KillEnemy();
+            Destroy(gameObject);
+            spriteRenderer.DOKill();
+            gameObject.transform.DOKill();
+        }
+
+    }
+
+    private void KillEnemy()
+    {
+        _gameDirector.audioManager.PlayEnemyDestroyedAS();
+        if (!_isEnemyDestroyed)
+        {   
+            if(enemyType != EnemyType.Boss)
             {
-                if(Random.value < .5f)
+                if (Random.value < .5f)
                 {
                     var newCoin = Instantiate(coinPrefab);
                     newCoin.transform.position = transform.position + Vector3.forward;
@@ -72,20 +84,20 @@ public class Enemy : MonoBehaviour
                     newPowerUp.transform.position = transform.position + Vector3.forward;
                     newPowerUp.StartPowerUp();
                 }
-                if (isBoss)
-                {
-                    _player.gameDirector.LevelCompleted();
-                }
-                _didSpawnCoin = true;
             }
-   
-            Destroy(gameObject);
-            spriteRenderer.DOKill();
-            gameObject.transform.DOKill();
+            else 
+            {
+                _player.gameDirector.LevelCompleted();
+            }
+            _isEnemyDestroyed = true;
         }
-
     }
-    
 
-    
+    public enum EnemyType
+    {
+        Basic,
+        Fast,
+        Shooting,
+        Boss,
+    }
 }

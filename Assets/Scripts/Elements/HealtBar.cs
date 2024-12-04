@@ -7,8 +7,10 @@ public class HealtBar : MonoBehaviour
 {
     public GameDirector gameDirector;
     public Player player;
+    
     public Image healtFill;
     private Slider slider;
+    
     private int _curHealth;
 
     private void Start()
@@ -42,6 +44,6 @@ public class HealtBar : MonoBehaviour
     }
     void Update()
     {
-        transform.position = player.transform.position + new Vector3(0,-.65f,0);
+        transform.position = player.transform.position + new Vector3(0,-.7f,0);
     }
 }
