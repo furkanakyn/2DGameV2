@@ -72,13 +72,7 @@ public class Enemy : MonoBehaviour
         {   
             if(enemyType != EnemyType.Boss)
             {
-                if (Random.value < .5f)
-                {
-                    var newCoin = Instantiate(coinPrefab);
-                    newCoin.transform.position = transform.position + Vector3.forward;
-                    newCoin.StartCoin();
-                }
-                else
+                
                 {
                     var newPowerUp = Instantiate(powerUpPrefab);
                     newPowerUp.transform.position = transform.position + Vector3.forward;

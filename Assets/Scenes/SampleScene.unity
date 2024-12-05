@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDirector: {fileID: 498721230}
+  player: {fileID: 0}
   bulletPrefab: {fileID: 836589813656828549, guid: ac6f09ce3a745864296bd2045473e615, type: 3}
   bulletsParent: {fileID: 591384535}
   playerMoveSpeed: 0.01
@@ -969,6 +970,7 @@ MonoBehaviour:
   player: {fileID: 428387533}
   healtBar: {fileID: 625466312}
   mainUI: {fileID: 129356934}
+  powerUp: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
   levelNo: 1
 --- !u!1 &519420028
 GameObject:
@@ -1327,6 +1329,7 @@ MonoBehaviour:
   gameDirector: {fileID: 498721230}
   player: {fileID: 428387533}
   healtFill: {fileID: 196305895}
+  slider: {fileID: 625466311}
 --- !u!1 &663527506
 GameObject:
   m_ObjectHideFlags: 0
