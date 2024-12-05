@@ -9,14 +9,11 @@ public class HealtBar : MonoBehaviour
     public Player player;
     
     public Image healtFill;
-    private Slider slider;
+    public Slider slider;
     
     private int _curHealth;
 
-    private void Start()
-    {
-        slider = GetComponent<Slider>();
-    }
+    
     public void SetMaxHealt(int healt)
     {
        slider.maxValue = healt;
