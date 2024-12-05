@@ -38,5 +38,9 @@ public class Bullet : MonoBehaviour
             gameObject.transform.DOKill();
             Destroy(gameObject);
         }
+        if (collision.CompareTag("PowerUp"))
+        {
+            collision.GetComponent<PowerUp>().IncreaseHealth(1);
+        }
     }
 }

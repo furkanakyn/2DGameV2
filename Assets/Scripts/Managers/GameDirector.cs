@@ -11,6 +11,7 @@ public class GameDirector : MonoBehaviour
     public Player player;
     public HealtBar healtBar;
     public MainUI mainUI;
+    public PowerUp powerUp;
 
     public int levelNo;
     void Start()

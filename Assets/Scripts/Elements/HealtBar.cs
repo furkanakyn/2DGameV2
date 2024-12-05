@@ -39,6 +39,12 @@ public class HealtBar : MonoBehaviour
             gameDirector.LevelFailed();
         }
     }
+    public void TakeHeal(int heal)
+    {
+        _curHealth += heal;
+        slider.value = _curHealth;
+    }
+
     void Update()
     {
         transform.position = player.transform.position + new Vector3(0,-.7f,0);

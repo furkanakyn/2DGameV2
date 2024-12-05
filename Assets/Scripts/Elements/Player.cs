@@ -6,8 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
+    public Player player;
     public Bullet bulletPrefab;
     public Transform bulletsParent;
+
    
     public float playerMoveSpeed;
     public float playerBulletSpeed;
@@ -63,12 +65,13 @@ public class Player : MonoBehaviour
         {
             StopShooting();
         }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Enemy"))
         {
-            _curHealth -= 1;
+            _curHealth -= enemyDamage;
             UpdateHealthBar(enemyDamage);
             gameDirector.FXManager.PlayPlayerHitFX(transform.position);
 
@@ -83,7 +86,23 @@ public class Player : MonoBehaviour
         {
             shootDirections.Add(new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0).normalized);
             collision.gameObject.SetActive(false);
+
+            var powerUp = collision.GetComponent<PowerUp>();
+            if (powerUp != null)
+            {
+                int healthAmount = powerUp.GetHealthAmount();
+                IncreaseHealth(healthAmount);
+            }
         }
+    }
+    public void IncreaseHealth(int healAmount)
+    {
+        _curHealth += healAmount;
+        if (_curHealth > startHealth) 
+            _curHealth = startHealth;
+
+        
+        gameDirector.healtBar.TakeHeal(healAmount);
     }
     void UpdateHealthBar(int damage)
     {
