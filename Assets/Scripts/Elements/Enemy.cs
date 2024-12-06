@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour
             else 
             {
                 _player.gameDirector.LevelCompleted();
+                _player.gameObject.SetActive(false);
             }
             _isEnemyDestroyed = true;
         }

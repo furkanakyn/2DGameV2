@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,13 +14,22 @@ public class MainUI : MonoBehaviour
     public TextMeshProUGUI killedEnemyTMP;
     public TextMeshProUGUI missedEnemyTMP;
     public TextMeshProUGUI collectedCoinTMP;
+    public TextMeshProUGUI totalCoin;
     public Button resButton;
     [Header("PROGRESS")]
+    public GameObject progressParent;
     public TextMeshProUGUI levelTMP;
+    public TextMeshProUGUI coinCountTMP;
     public Image levelIm;
     [Header("VICTORY")]
+    public GameObject victoryParent;
     public CanvasGroup victoryCanvasGroup;
 
+
+    private void Update()
+    {
+        TextCoinCount();
+    }
     public void RestartMainUI()
     {
         failCanvasGroup.gameObject.SetActive(false);
@@ -34,11 +44,11 @@ public class MainUI : MonoBehaviour
     public void LevelFailed(int ke , int me , int cc)
     {
         failCanvasGroup.gameObject.SetActive(true);
-        levelIm.gameObject.SetActive(false);
-        levelTMP.gameObject.SetActive(false);
+        progressParent.gameObject.SetActive(false);
         failCanvasGroup.DOFade(1, 1);
         resButton.transform.DOScale(1.1f, 1f).SetLoops(-1, LoopType.Yoyo);
 
+        totalCoin.text = PlayerPrefs.GetInt("TotalCoin").ToString();
         killedEnemyTMP.text = "Killed enemy: "+ ke;
         missedEnemyTMP.text = "Missed enemy: " + me;
         collectedCoinTMP.text = "Collected Coin: " + cc;
@@ -55,6 +65,12 @@ public class MainUI : MonoBehaviour
     {
         victoryCanvasGroup.gameObject.SetActive(true);
         victoryCanvasGroup.DOFade(1, .5f);
+
+
     }
-   
+   public void TextCoinCount()
+    {
+        var getCoin = PlayerPrefs.GetInt("TotalCoin");
+        coinCountTMP.text = "Coin: " + getCoin;
+    }
 }

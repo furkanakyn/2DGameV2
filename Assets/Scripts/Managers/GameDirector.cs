@@ -21,6 +21,7 @@ public class GameDirector : MonoBehaviour
     void Start()
     {
         RestartLevel();
+ 
     }
     private void Update()
     {
@@ -53,6 +54,12 @@ public class GameDirector : MonoBehaviour
             initalLevel = 1;
         }
         PlayerPrefs.SetInt("HighestLevelReached",initalLevel);
+    }
+    public void SetInitalCoin()
+    {
+        var initalCoin = PlayerPrefs.GetInt("TotalCoin");
+        PlayerPrefs.SetInt("TotalCoin", initalCoin + 1);
+     
     }
     public void LevelCompleted()
     {

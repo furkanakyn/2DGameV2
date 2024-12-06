@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
             StopShooting();
         }
 
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -81,6 +82,7 @@ public class Player : MonoBehaviour
             gameDirector.FXManager.PlayCoinCollectedFX(collision.transform.position);
             Destroy(collision.gameObject);
             gameDirector.CoinCollected();
+            gameDirector.SetInitalCoin();
         }
         if (collision.CompareTag("PowerUp"))
         {

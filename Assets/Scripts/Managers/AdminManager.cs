@@ -11,7 +11,9 @@ public class AdminManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             PlayerPrefs.SetInt("HighestLevelReached", 1);
+            PlayerPrefs.SetInt("TotalCoin", 0);
             gameDirector.RestartLevel();
+            
         }
     }
     
