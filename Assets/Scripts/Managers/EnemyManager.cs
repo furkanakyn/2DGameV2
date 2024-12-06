@@ -35,6 +35,11 @@ public class EnemyManager : MonoBehaviour
         }
         _enemies.Clear();
     }
+    public void DeleteAndStopEnemy()
+    {
+        DeleteEnemies();
+        StopCoroutine(_enemyGenerationCoroutine);
+    }
     IEnumerator EnemyGenerationCoroutine()
     {
         while(true)

@@ -12,13 +12,17 @@ public class HealtBar : MonoBehaviour
     public Slider slider;
     
     private int _curHealth;
+    private int _startHealth;
 
-    
+
+
     public void SetMaxHealt(int healt)
     {
-       slider.maxValue = healt;
-       slider.value = healt;
+        healtFill.color = Color.white;
+        slider.maxValue = healt;
+        slider.value = healt;
         _curHealth = healt;
+        _startHealth = healt;
     }
     public void TakeDamage(int damage)
     {
@@ -42,6 +46,10 @@ public class HealtBar : MonoBehaviour
     public void TakeHeal(int heal)
     {
         _curHealth += heal;
+        if(_curHealth > _startHealth)
+        {
+            _curHealth = _startHealth;
+        }
         slider.value = _curHealth;
     }
 

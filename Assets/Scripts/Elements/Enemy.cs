@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
     private void KillEnemy()
     {
         _gameDirector.audioManager.PlayEnemyDestroyedAS();
+        _gameDirector.EnemyKilled();
         if (!_isEnemyDestroyed)
         {   
             if(enemyType != EnemyType.Boss)

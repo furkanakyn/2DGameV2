@@ -14,6 +14,10 @@ public class GameDirector : MonoBehaviour
     public PowerUp powerUp;
 
     public int levelNo;
+    public int enemiesKilled = 0; 
+    public int coinsCollected = 0;
+    public int enemiesMissed = 0;
+
     void Start()
     {
         RestartLevel();
@@ -31,12 +35,15 @@ public class GameDirector : MonoBehaviour
         player.RestartPlayer();
         enemyManager.RestartEnemyManager();
         mainUI.RestartMainUI();
+        RestartScore();
         mainUI.SetLevelText(PlayerPrefs.GetInt("HighestLevelReached"));
-        healtBar.healtFill.color = Color.white;
+       
     }
     public void LevelFailed()
     {
-        mainUI.LevelFailed();
+        mainUI.LevelFailed(enemiesKilled,enemiesMissed,coinsCollected);
+        RestartScore();
+        enemyManager.DeleteAndStopEnemy();
     }
     public void SetInitalLevel()
     {
@@ -51,5 +58,26 @@ public class GameDirector : MonoBehaviour
     {
         PlayerPrefs.SetInt("HighestLevelReached", PlayerPrefs.GetInt("HighestLevelReached") + 1);
         mainUI.LevelCompleted();
+    }
+    public void EnemyKilled()
+    {
+        enemiesKilled++;
+        
+    }
+
+    public void CoinCollected()
+    {
+        coinsCollected++;
+       
+    }
+    public void EnemyMissed()
+    {
+        enemiesMissed++;
+    }
+    void RestartScore()
+    {
+        enemiesKilled = 0;
+        coinsCollected = 0;
+        enemiesMissed = 0;
     }
 }

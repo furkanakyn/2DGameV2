@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.92}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5911737777885217426
@@ -52,12 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a7432ef9bf5db4fbcbdd46b8a4fe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
+  powerUpPrefab: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
+  enemyType: 0
   startHealth: 0
   speed: 2
   healthTMP: {fileID: 4144206208157571408}
   spriteRenderer: {fileID: 362275541986391991}
-  coinPrefab: {fileID: 2377526465403793551, guid: d2f0f55702f5d404692d21db849526c8, type: 3}
-  powerUpPrefab: {fileID: -2643090870201745546, guid: 38ad4f6311e9fe141af1a2cff449ee81, type: 3}
   isBoss: 0
 --- !u!61 &7327919708240548548
 BoxCollider2D:
@@ -166,7 +167,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 1}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7696220739892942520
 MeshRenderer:
@@ -188,7 +189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 679344239474780428, guid: 324cac28d983b9c48ae2d398581913e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -230,10 +231,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 324cac28d983b9c48ae2d398581913e2, type: 2}
+  m_sharedMaterial: {fileID: 679344239474780428, guid: 324cac28d983b9c48ae2d398581913e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -257,8 +258,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

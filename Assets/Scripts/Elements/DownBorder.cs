@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DownBorder : MonoBehaviour
 {
+    public GameDirector gameDirector;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Coin"))
@@ -17,6 +18,7 @@ public class DownBorder : MonoBehaviour
             DOTween.Kill(collision.gameObject);
             collision.gameObject.transform.DOKill();
             Destroy(collision.gameObject);
+            gameDirector.EnemyMissed();
         }
         if (collision.CompareTag("PowerUp"))
         {

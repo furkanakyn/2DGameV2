@@ -6,7 +6,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
-    public Player player;
     public Bullet bulletPrefab;
     public Transform bulletsParent;
 
@@ -81,6 +80,7 @@ public class Player : MonoBehaviour
             gameDirector.coinManager.IncreaseCointCount(1);
             gameDirector.FXManager.PlayCoinCollectedFX(collision.transform.position);
             Destroy(collision.gameObject);
+            gameDirector.CoinCollected();
         }
         if (collision.CompareTag("PowerUp"))
         {
@@ -98,10 +98,10 @@ public class Player : MonoBehaviour
     public void IncreaseHealth(int healAmount)
     {
         _curHealth += healAmount;
-        if (_curHealth > startHealth) 
+        if (_curHealth > startHealth)
+        {
             _curHealth = startHealth;
-
-        
+        }
         gameDirector.healtBar.TakeHeal(healAmount);
     }
     void UpdateHealthBar(int damage)
