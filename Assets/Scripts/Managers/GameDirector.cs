@@ -64,7 +64,7 @@ public class GameDirector : MonoBehaviour
     public void LevelCompleted()
     {
         PlayerPrefs.SetInt("HighestLevelReached", PlayerPrefs.GetInt("HighestLevelReached") + 1);
-        mainUI.LevelCompleted();
+        mainUI.LevelCompleted(enemiesKilled, enemiesMissed, coinsCollected);
     }
     public void EnemyKilled()
     {

@@ -11,10 +11,10 @@ public class MainUI : MonoBehaviour
 {
     [Header("FAIL")]
     public CanvasGroup failCanvasGroup;
-    public TextMeshProUGUI killedEnemyTMP;
-    public TextMeshProUGUI missedEnemyTMP;
-    public TextMeshProUGUI collectedCoinTMP;
-    public TextMeshProUGUI totalCoin;
+    public TextMeshProUGUI failKilledEnemyTMP;
+    public TextMeshProUGUI failMissedEnemyTMP;
+    public TextMeshProUGUI failCollectedCoinTMP;
+    public TextMeshProUGUI failTotalCoin;
     public Button resButton;
     [Header("PROGRESS")]
     public GameObject progressParent;
@@ -24,6 +24,11 @@ public class MainUI : MonoBehaviour
     [Header("VICTORY")]
     public GameObject victoryParent;
     public CanvasGroup victoryCanvasGroup;
+    public Button nextLevelButton;
+    public TextMeshProUGUI victoryKilledEnemyTMP;
+    public TextMeshProUGUI victoryMissedEnemyTMP;
+    public TextMeshProUGUI victoryCollectedCoinTMP;
+    public TextMeshProUGUI victoryTotalCoin;
 
 
     private void Update()
@@ -34,8 +39,7 @@ public class MainUI : MonoBehaviour
     {
         failCanvasGroup.gameObject.SetActive(false);
         victoryCanvasGroup.gameObject.SetActive(false);
-        levelTMP.gameObject.SetActive(true);
-        levelIm.gameObject.SetActive(true);
+        progressParent.gameObject.SetActive(true);
         victoryCanvasGroup.alpha = 0;
         failCanvasGroup.alpha = 0;
 
@@ -47,11 +51,8 @@ public class MainUI : MonoBehaviour
         progressParent.gameObject.SetActive(false);
         failCanvasGroup.DOFade(1, 1);
         resButton.transform.DOScale(1.1f, 1f).SetLoops(-1, LoopType.Yoyo);
-
-        totalCoin.text = PlayerPrefs.GetInt("TotalCoin").ToString();
-        killedEnemyTMP.text = "Killed enemy: "+ ke;
-        missedEnemyTMP.text = "Missed enemy: " + me;
-        collectedCoinTMP.text = "Collected Coin: " + cc;
+        
+        UpdateScoreBoard(ke, me, cc);
     }
     public void SetLevelText(int l)
     {
@@ -61,14 +62,24 @@ public class MainUI : MonoBehaviour
         levelTMP.DOFade(1, 1f).SetLoops(2, LoopType.Yoyo);
         levelIm.DOFade(.7f, 1f).SetLoops(2, LoopType.Yoyo);
     }
-    public void LevelCompleted()
+    public void LevelCompleted(int ke, int me, int cc)
     {
         victoryCanvasGroup.gameObject.SetActive(true);
         victoryCanvasGroup.DOFade(1, .5f);
-
+        nextLevelButton.transform.DOScale(1.1f, 1f).SetLoops(-1, LoopType.Yoyo);
+        UpdateScoreBoard(ke, me, cc);
 
     }
-   public void TextCoinCount()
+
+    private void UpdateScoreBoard(int ke, int me, int cc)
+    {
+        victoryTotalCoin.text = PlayerPrefs.GetInt("TotalCoin").ToString();
+        victoryKilledEnemyTMP.text = "Killed enemy: " + ke;
+        victoryMissedEnemyTMP.text = "Missed enemy: " + me;
+        victoryCollectedCoinTMP.text = "Collected Coin: " + cc;
+    }
+
+    public void TextCoinCount()
     {
         var getCoin = PlayerPrefs.GetInt("TotalCoin");
         coinCountTMP.text = "Coin: " + getCoin;
