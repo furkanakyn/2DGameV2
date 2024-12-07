@@ -788,7 +788,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 52507faed931d8e48a2c2b018e8ac1fd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
@@ -2073,7 +2073,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fba075c71d92ae34d98690eea2b7554d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7d365e23738a5c740b25cc625c4387e2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
@@ -5695,6 +5695,7 @@ MonoBehaviour:
   failAS: {fileID: 711786907}
   victoryAS: {fileID: 2013253153}
   coinAS: {fileID: 1048154361}
+  bgAS: {fileID: 200813962}
 --- !u!4 &2010763164
 Transform:
   m_ObjectHideFlags: 0
