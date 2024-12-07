@@ -40,6 +40,7 @@ public class GameDirector : MonoBehaviour
         RestartScore();
         mainUI.SetLevelText(PlayerPrefs.GetInt("HighestLevelReached"));
         enemyManager.ClearSceneObjects();
+        audioManager.PlayBGAS();
     }
     public void LevelFailed()
     {
