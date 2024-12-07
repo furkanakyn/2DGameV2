@@ -8,11 +8,16 @@ public class EnemyManager : MonoBehaviour
     public Player player;
     public Enemy enemyPrefab;
     public Enemy bossEnemyPrefab;
-    
+
+    public Transform coinsParent;
+    public Transform powersParent;
+
     public float enemyYSpacing;
     private int _spawnedEnemyCount;
 
     private Coroutine _enemyGenerationCoroutine;
+    public Transform coinsContainer;
+    public Transform powerUpsContainer;
 
     public List<Enemy> _enemies = new List<Enemy>();
     public void RestartEnemyManager()
@@ -76,7 +81,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player , gameDirector);
+        newEnemy.StartEnemy(player , gameDirector, coinsParent,powersParent);
     }
 
     void SpawnTwoEnemies()
@@ -87,7 +92,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player, gameDirector);
+        newEnemy.StartEnemy(player, gameDirector, coinsParent, powersParent);
 
         var newEnemy2 = Instantiate(enemyPrefab);
         var enemyXPos2 = Random.Range(-1f, -2.2f);
@@ -95,7 +100,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy2.transform.position = new Vector3(enemyXPos2, enemyYPos2, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy2);
-        newEnemy2.StartEnemy(player, gameDirector);
+        newEnemy2.StartEnemy(player, gameDirector, coinsParent, powersParent);
     }
 
     void SpawnBoss()
@@ -106,6 +111,18 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
         _enemies.Add(newEnemy);
-        newEnemy.StartEnemy(player, gameDirector);
+        newEnemy.StartEnemy(player, gameDirector, coinsParent, powersParent);
+    }
+    public void ClearSceneObjects()
+    {
+        foreach (Transform child in coinsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in powerUpsContainer)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

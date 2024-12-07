@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     public Coin coinPrefab;
     public PowerUp powerUpPrefab;
 
+    private Transform _coinsParent;
+    private Transform _powersParent;
+
     public EnemyType enemyType;
 
     public int startHealth;
@@ -25,7 +28,7 @@ public class Enemy : MonoBehaviour
     public bool isBoss;
     private bool _isEnemyDestroyed;
 
-    public void StartEnemy(Player player, GameDirector gameDirector)
+    public void StartEnemy(Player player, GameDirector gameDirector,Transform coinsParent, Transform powersParent)
     {
         _player = player;
         _gameDirector = gameDirector;
@@ -33,6 +36,8 @@ public class Enemy : MonoBehaviour
         startHealth += 5 * (player.shootDirections.Count - 1);
         _currentHealth = startHealth;
         healthTMP.text = _currentHealth.ToString();
+        _coinsParent = coinsParent;
+        _powersParent = powersParent;
     }
 
     private void Update()
@@ -75,13 +80,13 @@ public class Enemy : MonoBehaviour
             {
                 if (Random.value < .5f)
                 {
-                    var newCoin = Instantiate(coinPrefab);
+                    var newCoin = Instantiate(coinPrefab,_coinsParent);
                     newCoin.transform.position = transform.position + Vector3.forward;
                     newCoin.StartCoin();
                 }
                 else
                 {
-                    var newPowerUp = Instantiate(powerUpPrefab);
+                    var newPowerUp = Instantiate(powerUpPrefab,_powersParent);
                     newPowerUp.transform.position = transform.position + Vector3.forward;
                     newPowerUp.StartPowerUp();
                 }
@@ -94,6 +99,7 @@ public class Enemy : MonoBehaviour
             _isEnemyDestroyed = true;
         }
     }
+  
 
     public enum EnemyType
     {

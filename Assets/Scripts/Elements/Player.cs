@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public GameDirector gameDirector;
     public Bullet bulletPrefab;
     public Transform bulletsParent;
+    public AudioManager audioManager;
 
    
     public float playerMoveSpeed;
@@ -83,6 +84,7 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             gameDirector.CoinCollected();
             gameDirector.SetInitalCoin();
+            audioManager.PlayCoinCollectedAS();
         }
         if (collision.CompareTag("PowerUp"))
         {
